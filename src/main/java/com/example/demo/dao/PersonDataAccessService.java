@@ -22,17 +22,15 @@ public class PersonDataAccessService implements PersonDao {
 
     @Override
     public int insertPerson(UUID id, Person person) {
-        String insertId = id.toString();
         String insertPersonName = person.getName();
-        final String sql = "INSERT INTO" + " " + TABLE_NAME + " " + "(id, name) VALUES" + " " + "(" + id + ","
-                + insertPersonName + ")";
-        jdbcTemplate.execute(sql); // bug: id is not string but UUID for table input
+        final String sql = "INSERT INTO" + " " + TABLE_NAME + " " + "(id, name) VALUES (?,?)";
+        jdbcTemplate.update(sql, id, insertPersonName); // bug: id is not string but UUID for table input
         return 1;
     }
 
     @Override
     public List<Person> selectAllPeople() {
-        final String sql = "SELECT id, name FROM person"; //sql statements will be parsed
+        final String sql = "SELECT id, name FROM" + " " + TABLE_NAME; //sql statements will be parsed
 
         /*Parses sql statement to select the data. Maps the data into Java objects*/
         return jdbcTemplate.query(sql, (resultSet, i) -> {
@@ -44,7 +42,7 @@ public class PersonDataAccessService implements PersonDao {
 
     @Override
     public Optional<Person> selectPersonById(UUID id) {
-        final String sql = "SELECT id, name FROM person WHERE id = ?"; //note the question mark
+        final String sql = "SELECT id, name FROM" + " " + TABLE_NAME + " " + "WHERE id = ?"; //note the question mark
         Person person = jdbcTemplate.queryForObject(sql,
                 new Object[]{id},
                 (resultSet, i) -> {
@@ -57,11 +55,16 @@ public class PersonDataAccessService implements PersonDao {
 
     @Override
     public int deletePersonById(UUID id) {
-        return 0;
+        final String sql = "DELETE FROM" + " " + TABLE_NAME + " " + "WHERE id = ?";
+        jdbcTemplate.update(sql, id);
+        return 1;
     }
 
     @Override
     public int updatePersonById(UUID id, Person person) {
-        return 0;
+        final String sql = "UPDATE" + " " + TABLE_NAME + " " + "SET name = ? WHERE id = ?";
+        final String newPersonName = person.getName();
+        jdbcTemplate.update(sql, newPersonName, id);
+        return 1;
     }
 }

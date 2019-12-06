@@ -38,7 +38,7 @@ public class FakePersonDataAccessService implements PersonDao {
             return 0;
         }
         DB.remove(personMaybe.get());
-        return 0;
+        return 1;
     }
 
     @Override
