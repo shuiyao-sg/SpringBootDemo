@@ -46,7 +46,6 @@ public class PersonDataAccessService implements PersonDao {
         Person person = jdbcTemplate.queryForObject(sql,
                 new Object[]{id},
                 (resultSet, i) -> {
-                    UUID personId = UUID.fromString(resultSet.getString("id"));
                     String name = resultSet.getString("name");
                     return new Person(id, name);
                 });
