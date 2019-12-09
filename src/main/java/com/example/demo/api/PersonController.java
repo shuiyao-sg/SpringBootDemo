@@ -29,8 +29,8 @@ public class PersonController {
 
     @GetMapping
     public List<Person> getAllPeople() {
-//        return personService.getAllPeople();
-        throw new ApiRequestException("Cannot get all people");
+        return personService.getAllPeople();
+//        throw new ApiRequestException("Cannot get all people");
     }
 
     @GetMapping(path = "{id}")
