@@ -45,21 +45,39 @@ liquibase {
 //		changeLogFile 'src/main/resources/db/changelog/db.changelog-master.yaml'
 //		propertyFile 'src/main/resources/liquibase.properties'
 //	}
-	activities {
-		main {
-			changeLogFile 'src/main/resources/db/changelog/db.changelog-master.yaml'
-			propertyFile 'src/main/resources/liquibase.properties'
-//			url 'jdbc:postgresql://localhost:8888/demodb'
-//			username 'root'
-//			password 'root'
-			// driver 'com.mysql.jdbc.Driver'
+//	activities {
+//		main {
+//
+//			propertyFile 'src/main/resources/liquibase.properties'
+////			url 'jdbc:postgresql://localhost:8888/demodb'
+////			username 'root'
+////			password 'root'
+//			// driver 'com.mysql.jdbc.Driver'
+//
+////		changeLogParameters([ myToken: myValue,
+////							  second: 'secondValue'])
+////		// changeLogParameters([ myToken: 'myParamValue',
+////		// second: 'secondValue'])
+//		}
+//	}
 
-//		changeLogParameters([ myToken: myValue,
-//							  second: 'secondValue'])
-//		// changeLogParameters([ myToken: 'myParamValue',
-//		// second: 'secondValue'])
-		}
+//	configure {
+//		propertyFile 'src/main/resources/liquibase.properties'
+//	}
+
+	generateChangelog {
+//		changeLogFile 'src/main/resources/db/changelog/db.changelog-0.0.2.yaml'
+//		path 'src/main/resources/db/changelog/db.changelog-0.0.2.yaml'
+		classpath('src/main/resources/db/changelog/db.changelog-0.0.2.yaml')
+
+
+
+//		url 'jdbc:postgresql://localhost:8888/demodb'
+//		driver 'org.postgresql.Driver'
+//		username 'postgres'
+//		password 'password'
 	}
+
 
 
 }
