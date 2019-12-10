@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.2.1.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
 	id 'java'
+	id "org.liquibase.gradle" version "2.0.2"
 }
 
 group = 'com.example'
@@ -20,7 +21,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc:2.2.1.RELEASE'
 	implementation 'org.postgresql:postgresql:42.2.8'
 //	implementation 'org.flywaydb:flyway-core:6.1.0'
-	implementation 'org.liquibase:liquibase-core:3.8.2'
+	//implementation 'org.liquibase:liquibase-core:3.8.2'
+	liquibaseRuntime 'org.liquibase:liquibase-core:3.8.2'
 
 
 	implementation 'javax.xml.bind:jaxb-api:2.4.0-b180830.0359'
@@ -31,4 +33,33 @@ dependencies {
 
 test {
 	useJUnitPlatform()
+}
+
+liquibase {
+//	configurations {
+//		changeLogFile 'src/main/resources/db/changelog/db.changelog-master.yaml'
+//		propertyFile 'src/main/resources/liquibase.properties'
+//	}
+//
+//	configure {
+//		changeLogFile 'src/main/resources/db/changelog/db.changelog-master.yaml'
+//		propertyFile 'src/main/resources/liquibase.properties'
+//	}
+	activities {
+		main {
+			changeLogFile 'src/main/resources/db/changelog/db.changelog-master.yaml'
+			propertyFile 'src/main/resources/liquibase.properties'
+//			url 'jdbc:postgresql://localhost:8888/demodb'
+//			username 'root'
+//			password 'root'
+			// driver 'com.mysql.jdbc.Driver'
+
+//		changeLogParameters([ myToken: myValue,
+//							  second: 'secondValue'])
+//		// changeLogParameters([ myToken: 'myParamValue',
+//		// second: 'secondValue'])
+		}
+	}
+
+
 }
