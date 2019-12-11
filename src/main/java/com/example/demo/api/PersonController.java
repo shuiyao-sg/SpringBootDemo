@@ -1,6 +1,5 @@
 package com.example.demo.api;
 
-import com.example.demo.exception.ApiRequestException;
 import com.example.demo.model.Person;
 import com.example.demo.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,7 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.UUID;
 
-@RequestMapping("api/v1/person")
+@RequestMapping("/")
 @RestController
 public class PersonController {
 

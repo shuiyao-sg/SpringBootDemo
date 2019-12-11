@@ -5,8 +5,9 @@ plugins {
 }
 
 group = 'com.example'
-version = '0.0.1-SNAPSHOT'
+//version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
+targetCompatibility = '11'
 
 repositories {
 	mavenCentral()
@@ -31,4 +32,9 @@ dependencies {
 
 test {
 	useJUnitPlatform()
+}
+
+bootJar {
+	baseName = 'demo'
+	version =  '0.1.0'
 }
