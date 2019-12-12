@@ -23,6 +23,11 @@ dependencies {
     implementation 'org.postgresql:postgresql:42.2.8'
     implementation 'org.liquibase:liquibase-core:3.8.2'
 
+    implementation 'javax.xml.bind:jaxb-api:2.4.0-b180830.0359'
+    implementation 'com.sun.xml.bind:jaxb-core:2.3.0.1'
+    implementation 'com.sun.xml.bind:jaxb-impl:2.3.0.1'
+    implementation 'javax.activation:activation:1.1.1'
+
     liquibaseRuntime 'org.springframework.boot:spring-boot-starter-web'
     liquibaseRuntime 'org.springframework.boot:spring-boot-starter-jdbc:2.2.1.RELEASE'
     liquibaseRuntime 'org.postgresql:postgresql:42.2.8'
@@ -30,10 +35,6 @@ dependencies {
 //    liquibaseRuntime 'ch.qos.logback:logback-classic:1.2.3'
 //    liquibaseRuntime 'org.yaml:snakeyaml:1.25'
 
-//	implementation 'javax.xml.bind:jaxb-api:2.4.0-b180830.0359'
-//	implementation 'com.sun.xml.bind:jaxb-core:2.3.0.1'
-//	implementation 'com.sun.xml.bind:jaxb-impl:2.3.0.1'
-//	implementation 'javax.activation:activation:1.1.1'
     liquibaseRuntime 'javax.xml.bind:jaxb-api:2.4.0-b180830.0359'
     liquibaseRuntime 'com.sun.xml.bind:jaxb-core:2.3.0.1'
     liquibaseRuntime 'com.sun.xml.bind:jaxb-impl:2.3.0.1'
