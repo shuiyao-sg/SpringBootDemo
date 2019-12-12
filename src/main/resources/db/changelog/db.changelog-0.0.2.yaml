@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - preConditions:
+      - runningAs:
+          username: postgres
+  - changeSet:
+      id: 3
+      author: nvoxland
+      changes:
+        - addColumn:
+            tableName: person
+            columns:
+              - column:
+                  name: address
+                  type: varchar(50)
