@@ -1,9 +1,9 @@
 version: "3"
 services:
-  postgres:
+  pg_demo:
     image: postgres:alpine
     network_mode: bridge
-    container_name: postgres-deploy
+    container_name: pg_demo
     volumes:
       - postgres-data:/var/lib/postgresql/data
     expose:
@@ -16,18 +16,18 @@ services:
       - POSTGRES_DB=demodb
     restart: unless-stopped
   # APP*****************************************
-  springbootapp:
-    image: springbootapp:latest
+  testapp1:
+    image: testapp1:latest
     network_mode: bridge
-    container_name: springbootapp
+    container_name: testapp1
     expose:
       - 8080
     ports:
       - 8080:8080
     restart: unless-stopped
     depends_on:
-      - postgres
+      - pg_demo
     links:
-      - postgres
+      - pg_demo
 volumes:
   postgres-data:
