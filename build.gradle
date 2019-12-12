@@ -21,14 +21,14 @@ dependencies {
     }
     implementation 'org.springframework.boot:spring-boot-starter-jdbc:2.2.1.RELEASE'
     implementation 'org.postgresql:postgresql:42.2.8'
-//	implementation 'org.flywaydb:flyway-core:6.1.0'
-//	implementation 'org.liquibase:liquibase-maven-plugin:3.8.2'
     implementation 'org.liquibase:liquibase-core:3.8.2'
-    liquibaseRuntime 'org.liquibase:liquibase-core:3.8.2'
-    liquibaseRuntime 'ch.qos.logback:logback-classic:1.2.3'
-    liquibaseRuntime 'org.yaml:snakeyaml:1.25'
 
-//	liquibaseRuntime 'com.mattbertolini:liquibase-slf4j:2.0.0'
+    liquibaseRuntime 'org.springframework.boot:spring-boot-starter-web'
+    liquibaseRuntime 'org.springframework.boot:spring-boot-starter-jdbc:2.2.1.RELEASE'
+    liquibaseRuntime 'org.postgresql:postgresql:42.2.8'
+    liquibaseRuntime 'org.liquibase:liquibase-core:3.8.2'
+//    liquibaseRuntime 'ch.qos.logback:logback-classic:1.2.3'
+//    liquibaseRuntime 'org.yaml:snakeyaml:1.25'
 
 //	implementation 'javax.xml.bind:jaxb-api:2.4.0-b180830.0359'
 //	implementation 'com.sun.xml.bind:jaxb-core:2.3.0.1'
@@ -53,7 +53,7 @@ liquibase {
             username 'postgres'
             password 'password'
             driver 'org.postgresql.Driver'
-            classpath 'src/main/resources/liquibase/postgresql-42.2.9.jar'
+//            classpath 'src/main/resources/liquibase/postgresql-42.2.9.jar'
         }
 //		security {
 //            changeLogFile 'src/main/resources/db/changelog/securitychangelog.yaml'
