@@ -1,8 +1,8 @@
 plugins {
-	id 'org.springframework.boot' version '2.2.1.RELEASE'
-	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
-	id 'java'
-	id "org.liquibase.gradle" version "2.0.2"
+    id 'org.springframework.boot' version '2.2.1.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+    id 'java'
+    id "org.liquibase.gradle" version "2.0.2"
 }
 
 group = 'com.example'
@@ -11,58 +11,73 @@ sourceCompatibility = '11'
 targetCompatibility = '11'
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	testImplementation('org.springframework.boot:spring-boot-starter-test') {
-		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-	}
-	implementation 'org.springframework.boot:spring-boot-starter-jdbc:2.2.1.RELEASE'
-	implementation 'org.postgresql:postgresql:42.2.8'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc:2.2.1.RELEASE'
+    implementation 'org.postgresql:postgresql:42.2.8'
 //	implementation 'org.flywaydb:flyway-core:6.1.0'
-	//implementation 'org.liquibase:liquibase-core:3.8.2'
-	liquibaseRuntime 'org.liquibase:liquibase-core:3.8.2'
+//	implementation 'org.liquibase:liquibase-maven-plugin:3.8.2'
+    implementation 'org.liquibase:liquibase-core:3.8.2'
+    liquibaseRuntime 'org.liquibase:liquibase-core:3.8.2'
+    liquibaseRuntime 'ch.qos.logback:logback-classic:1.2.3'
+    liquibaseRuntime 'org.yaml:snakeyaml:1.25'
 
+//	liquibaseRuntime 'com.mattbertolini:liquibase-slf4j:2.0.0'
 
-	implementation 'javax.xml.bind:jaxb-api:2.4.0-b180830.0359'
-	implementation 'com.sun.xml.bind:jaxb-core:2.3.0.1'
-	implementation 'com.sun.xml.bind:jaxb-impl:2.3.0.1'
-	implementation 'javax.activation:activation:1.1.1'
+//	implementation 'javax.xml.bind:jaxb-api:2.4.0-b180830.0359'
+//	implementation 'com.sun.xml.bind:jaxb-core:2.3.0.1'
+//	implementation 'com.sun.xml.bind:jaxb-impl:2.3.0.1'
+//	implementation 'javax.activation:activation:1.1.1'
+    liquibaseRuntime 'javax.xml.bind:jaxb-api:2.4.0-b180830.0359'
+    liquibaseRuntime 'com.sun.xml.bind:jaxb-core:2.3.0.1'
+    liquibaseRuntime 'com.sun.xml.bind:jaxb-impl:2.3.0.1'
+    liquibaseRuntime 'javax.activation:activation:1.1.1'
 }
 
 test {
-	useJUnitPlatform()
+    useJUnitPlatform()
 }
 
 
 liquibase {
-	activities {
-		main {
-			changeLogFile 'src/main/resources/db/changelog/db.changelog-master.yaml'
-			url 'jdbc:postgresql://pg_demo:5432/demodb'
-			username 'postgres'
-			password 'password'
-		}
+    activities {
+        main {
+            changeLogFile 'src/main/resources/db/changelog/mainchangelog.yaml'
+            url 'jdbc:postgresql://localhost:5432/demodb'
+            username 'postgres'
+            password 'password'
+            driver 'org.postgresql.Driver'
+            classpath 'src/main/resources/liquibase/postgresql-42.2.9.jar'
+        }
 //		security {
-//			changeLogFile 'src/main/db/security.groovy'
-//			url project.ext.securityUrl
-//			username project.ext.securityUsername
-//			password project.ext.securityPassword
+//            changeLogFile 'src/main/resources/db/changelog/securitychangelog.yaml'
+//            url 'jdbc:postgresql://localhost:5432/demodb'
+//            username 'postgres'
+//            password 'password'
+//            driver 'org.postgresql.Driver'
+//            classpath 'src/main/resources/liquibase/postgresql-42.2.9.jar'
 //		}
 //		diffMain {
-//			changeLogFile 'src/main/db/main.groovy'
-//			url project.ext.mainUrl
-//			username project.ext.mainUsername
-//			password project.ext.mainPassword
-//			difftypes 'data'
+//            changeLogFile 'src/main/resources/db/changelog/diffchangelog.yaml'
+//            url 'jdbc:postgresql://localhost:5432/demodb'
+//            username 'postgres'
+//            password 'password'
+//            driver 'org.postgresql.Driver'
+//            classpath 'src/main/resources/liquibase/postgresql-42.2.9.jar'
 //		}
-	}
-//	runList = project.ext.runList
+    }
+
+//    runList = 'main, security, diffMain'
+    runList = 'main'
 }
 
 bootJar {
-	baseName = 'demo'
-	version = '0.1.0'
+    baseName = 'demo'
+    version = '0.1.0'
 }
