@@ -38,49 +38,31 @@ test {
 
 
 liquibase {
-//	configurations {
-//		changeLogFile 'src/main/resources/db/changelog/db.changelog-master.yaml'
-//		propertyFile 'src/main/resources/liquibase.properties'
-//	}
-//
-//	configure {
-//		changeLogFile 'src/main/resources/db/changelog/db.changelog-master.yaml'
-//		propertyFile 'src/main/resources/liquibase.properties'
-//	}
-//	activities {
-//		main {
-//
-//			propertyFile 'src/main/resources/liquibase.properties'
-////			url 'jdbc:postgresql://localhost:8888/demodb'
-////			username 'root'
-////			password 'root'
-//			// driver 'com.mysql.jdbc.Driver'
-//
-////		changeLogParameters([ myToken: myValue,
-////							  second: 'secondValue'])
-////		// changeLogParameters([ myToken: 'myParamValue',
-////		// second: 'secondValue'])
+	activities {
+		main {
+			changeLogFile 'src/main/resources/db/changelog/db.changelog-master.yaml'
+			url 'jdbc:postgresql://pg_demo:5432/demodb'
+			username 'postgres'
+			password 'password'
+		}
+//		security {
+//			changeLogFile 'src/main/db/security.groovy'
+//			url project.ext.securityUrl
+//			username project.ext.securityUsername
+//			password project.ext.securityPassword
 //		}
-//	}
-
-//	configure {
-//		propertyFile 'src/main/resources/liquibase.properties'
-//	}
-
-	generateChangelog {
-//		changeLogFile 'src/main/resources/db/changelog/db.changelog-0.0.2.yaml'
-//		path 'src/main/resources/db/changelog/db.changelog-0.0.2.yaml'
-		classpath('src/main/resources/db/changelog/db.changelog-0.0.2.yaml')
-
-
-
-//		url 'jdbc:postgresql://localhost:8888/demodb'
-//		driver 'org.postgresql.Driver'
-//		username 'postgres'
-//		password 'password'
+//		diffMain {
+//			changeLogFile 'src/main/db/main.groovy'
+//			url project.ext.mainUrl
+//			username project.ext.mainUsername
+//			password project.ext.mainPassword
+//			difftypes 'data'
+//		}
 	}
+//	runList = project.ext.runList
+}
 
 bootJar {
 	baseName = 'demo'
-	version =  '0.1.0'
+	version = '0.1.0'
 }
