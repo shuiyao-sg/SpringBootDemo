@@ -4,8 +4,8 @@ databaseChangeLog:
           username: postgres
 
   - changeSet:
-      id: 2
-      author: nvoxland
+      id: 3
+      author: bob
       changes:
         - createTable:
             tableName: person
