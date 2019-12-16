@@ -1,0 +1,22 @@
+databaseChangeLog:
+  - preConditions:
+      - runningAs:
+          username: postgres
+
+  - changeSet:
+      id: 2.6
+      author: Admin
+      changes:
+#        - dropNotNullContraint:
+#            tableName: person
+#            columnName: last_name
+#        - addDefaultValue:
+#            tableName: person
+#            columnName: last_name
+#        - addNotNullContraint:
+#            tableName: person
+#            columnName: surname
+        - sql:
+            sql: ALTER TABLE person ALTER COLUMN last_name DROP NOT NULL;
+        - sql:
+            sql: ALTER TABLE person ALTER COLUMN surname SET NOT NULL;

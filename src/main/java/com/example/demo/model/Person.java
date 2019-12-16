@@ -14,9 +14,10 @@ public class Person {
     @NotBlank
     private final String firstName;
 
-    @NotBlank
-    private final String lastName; //TODO: remove not nullable constraint in v3.0
+//    @NotBlank
+//    private final String lastName; //TODO: remove not nullable constraint in v3.0
 
+    @NotBlank
     private final String surname; // TODO: add not nullable constraint in v3.0
 
 //    public Person(@JsonProperty("id") UUID id,
@@ -30,7 +31,7 @@ public class Person {
                   @JsonProperty("surname") String surname) {
         this.id = id;
         this.firstName = firstName;
-        this.lastName = surname; //TODO: remove this line in v3.0
+//        this.lastName = surname; //TODO: remove this line in v3.0
         this.surname = surname;
     }
 
@@ -51,6 +52,6 @@ public class Person {
 //    }
 
     public String getSurname() {
-        return surname == null ? lastName : surname; //TODO: return surname directly in v3.0
+        return surname; //TODO: return surname directly in v3.0
     }
 }

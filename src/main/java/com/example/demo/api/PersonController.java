@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.UUID;
 
 
-@RequestMapping("/v2")
+@RequestMapping("/v3")
 
 @RestController
 public class PersonController {
