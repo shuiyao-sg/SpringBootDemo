@@ -1,0 +1,12 @@
+databaseChangeLog:
+  - preConditions:
+      - runningAs:
+          username: postgres
+
+  - changeSet:
+      id: 2.7
+      author: Admin
+      changes:
+        - dropColumn:
+            tableName: person
+            columnName: last_name
