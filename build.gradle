@@ -80,5 +80,5 @@ liquibase {
 
 bootJar {
     baseName = 'demo'
-    version = '0.1.0'
+    version = 'v1'
 }
