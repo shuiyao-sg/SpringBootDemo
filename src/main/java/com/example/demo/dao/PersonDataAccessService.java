@@ -69,7 +69,7 @@ public class PersonDataAccessService implements PersonDao {
 
     @Override
     public int updatePersonById(UUID id, Person person) {
-        final String sql = "UPDATE" + " " + TABLE_NAME + " " + "SET" + " " + SECOND_FIELD + " = ? "
+        final String sql = "UPDATE" + " " + TABLE_NAME + " " + "SET" + " " + SECOND_FIELD + " = ? , "
                 + THIRD_FIELD + " = ? " + "WHERE" + " " + FIRST_FIELD + " = ?";
         final String newPersonFirstName = person.getFirstName();
         final String newPersonLastName = person.getLastName();
