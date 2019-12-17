@@ -26,13 +26,17 @@ databaseChangeLog:
 #
 
   - changeSet:
-      id: 2.2
+      id: 2.2.4
       author: Admin
       changes:
         - sqlFile:
             path: db/sql/write_surname_function.sql
         - sqlFile:
             path: db/sql/write_surname_trigger.sql
+#        - sqlFile:
+#            path: db/sql/write_lastname_function.sql
+#        - sqlFile:
+#            path: db/sql/write_lastname_trigger.sql
 
   - changeSet:
       id: 2.3

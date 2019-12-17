@@ -17,6 +17,7 @@ public class PersonDataAccessService implements PersonDao {
     private static final String ID = "id";
     private static final String FIRST_NAME = "first_name";
     private static final String LAST_NAME = "last_name";
+    private static final String SURNAME = "surname";
 
     @Autowired
     public PersonDataAccessService(JdbcTemplate jdbcTemplate) {
@@ -26,36 +27,37 @@ public class PersonDataAccessService implements PersonDao {
     @Override
     public int insertPerson(UUID id, Person person) {
         String insertPersonFirstName = person.getFirstName();
-        String insertPersonLastName = person.getLastName();
-        final String sql = "INSERT INTO" + " " + TABLE_NAME + " " + "(" + ID + " , " + FIRST_NAME + " , "
-                + LAST_NAME + ") VALUES (?,?,?)";
-        jdbcTemplate.update(sql, id, insertPersonFirstName, insertPersonLastName);
+        String insertPersonLastName = person.getSurname(); //todo: delete in v3
+        String insertPersonSurname = person.getSurname();
+        final String sql = "INSERT INTO" + " " + TABLE_NAME + " " + "(" + ID + " , " + FIRST_NAME + " , " + LAST_NAME
+                + " , " + SURNAME + ") VALUES (?,?,?,?)"; //todo: delete LAST_NAME in v3
+        jdbcTemplate.update(sql, id, insertPersonFirstName, insertPersonLastName, insertPersonSurname);
         return 1;
     }
 
     @Override
     public List<Person> selectAllPeople() {
-        final String sql = "SELECT" + " " + ID + " , " + FIRST_NAME + " , " + LAST_NAME + " " + "FROM" + " " + TABLE_NAME; //sql statements will be parsed
+        final String sql = "SELECT" + " " + ID + " , " + FIRST_NAME + " , " + SURNAME + " " + "FROM" + " " + TABLE_NAME; //sql statements will be parsed
 
         /*Parses sql statement to select the data. Maps the data into Java objects*/
         return jdbcTemplate.query(sql, (resultSet, i) -> {
             UUID id = UUID.fromString(resultSet.getString(ID)); //input column name
             String firstName = resultSet.getString(FIRST_NAME);
-            String lastName = resultSet.getString(LAST_NAME);
-            return new Person(id, firstName, lastName);
+            String surname = resultSet.getString(SURNAME);
+            return new Person(id, firstName, surname);
         });
     }
 
     @Override
     public Optional<Person> selectPersonById(UUID id) {
-        final String sql = "SELECT" + " " + ID + " , " + FIRST_NAME + " , " + LAST_NAME + " " + "FROM"
+        final String sql = "SELECT" + " " + ID + " , " + FIRST_NAME + " , " + SURNAME + " " + "FROM"
                 + " " + TABLE_NAME + " " + "WHERE" + " " + ID + " = ?"; //note the question mark
         Person person = jdbcTemplate.queryForObject(sql,
                 new Object[]{id},
                 (resultSet, i) -> {
                     String firstName = resultSet.getString(FIRST_NAME);
-                    String lastName = resultSet.getString(LAST_NAME);
-                    return new Person(id, firstName, lastName);
+                    String surname = resultSet.getString(SURNAME);
+                    return new Person(id, firstName, surname);
                 });
         return Optional.ofNullable(person);
     }
@@ -70,10 +72,11 @@ public class PersonDataAccessService implements PersonDao {
     @Override
     public int updatePersonById(UUID id, Person person) {
         final String sql = "UPDATE" + " " + TABLE_NAME + " " + "SET" + " " + FIRST_NAME + " = ? , "
-                + LAST_NAME + " = ? " + "WHERE" + " " + ID + " = ?";
+                + LAST_NAME + " = ? , " + SURNAME + " = ? " + "WHERE" + " " + ID + " = ?"; //todo: delete LAST_NAME in v3
         final String newPersonFirstName = person.getFirstName();
-        final String newPersonLastName = person.getLastName();
-        jdbcTemplate.update(sql, newPersonFirstName, newPersonLastName, id);
+        final String newPersonLastName = person.getSurname(); //todo: delete in v3
+        final String newPersonSurname = person.getSurname();
+        jdbcTemplate.update(sql, newPersonFirstName, newPersonLastName, newPersonSurname, id);
         return 1;
     }
 }
