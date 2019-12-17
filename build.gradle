@@ -50,7 +50,7 @@ liquibase {
     activities {
         main {
             changeLogFile 'src/main/resources/db/changelog/mainchangelog.yaml'
-            url 'jdbc:postgresql://localhost:5432/demodb'
+            url 'jdbc:postgresql://pg_demo:5432/triggerdb'
             username 'postgres'
             password 'password'
             driver 'org.postgresql.Driver'
@@ -79,6 +79,6 @@ liquibase {
 }
 
 bootJar {
-    baseName = 'demo'
+    baseName = 'demo-trigger'
     version = 'v1'
 }
