@@ -1,0 +1,42 @@
+databaseChangeLog:
+  - preConditions:
+      - runningAs:
+          username: postgres
+
+  - changeSet:
+      id: 2.1
+      author: Admin
+      changes:
+        - addColumn:
+            tableName: person
+            columns:
+              - column:
+                  name: surname
+                  type: varchar(100)
+                  constraints:
+                    nullable: true
+
+#  - changeSet:
+#      id: 2.1
+#      author: Admin
+#      changes:
+#        - createFunction:
+#            functionName: write_surname
+#            functionBody:
+#
+
+  - changeSet:
+      id: 2.2
+      author: Admin
+      changes:
+        - sqlFile:
+            path: db/sql/write_surname_function.sql
+        - sqlFile:
+            path: db/sql/write_surname_trigger.sql
+
+  - changeSet:
+      id: 2.3
+      author: Admin
+      changes:
+        - sql:
+            sql: UPDATE person SET surname = last_name;
