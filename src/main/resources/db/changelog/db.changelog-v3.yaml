@@ -4,23 +4,10 @@ databaseChangeLog:
           username: postgres
 
   - changeSet:
-      id: 3.1
-      author: Admin
-      changes:
-        - dropColumn:
-            tableName: person
-            columnName: last_name
-
-  - changeSet:
-      id: 3.2
+      id: 3.1.1
       author: Admin
       changes:
         - sql:
             sql: ALTER TABLE person ALTER COLUMN surname SET NOT NULL;
-
-  - changeSet:
-      id: 3.3
-      author: Admin
-      changes:
-        - sqlFile:
-            path: db/sql/drop_triggers_v3.sql
+        - sql:
+            sql: ALTER TABLE person ALTER COLUMN last_name DROP NOT NULL;
