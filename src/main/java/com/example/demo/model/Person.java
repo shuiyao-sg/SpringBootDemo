@@ -14,9 +14,10 @@ public class Person {
     @NotBlank
     private final String firstName;
 
-    @NotBlank
-    private final String lastName;
+//    @NotBlank
+//    private final String lastName;
 
+    @NotBlank
     private final String surname;
 
 //    public Person(@JsonProperty("id") UUID id,
@@ -30,7 +31,7 @@ public class Person {
                   @JsonProperty("surname") String surname) {
         this.id = id;
         this.firstName = firstName;
-        this.lastName = surname;
+//        this.lastName = surname;
         this.surname = surname;
     }
 

@@ -16,7 +16,7 @@ public class PersonDataAccessService implements PersonDao {
     private static final String TABLE_NAME = "person";
     private static final String ID = "id";
     private static final String FIRST_NAME = "first_name";
-    private static final String LAST_NAME = "last_name";
+//    private static final String LAST_NAME = "last_name";
     private static final String SURNAME = "surname";
 
     @Autowired
@@ -27,11 +27,10 @@ public class PersonDataAccessService implements PersonDao {
     @Override
     public int insertPerson(UUID id, Person person) {
         String insertPersonFirstName = person.getFirstName();
-        String insertPersonLastName = person.getSurname(); //todo: delete in v3
         String insertPersonSurname = person.getSurname();
-        final String sql = "INSERT INTO" + " " + TABLE_NAME + " " + "(" + ID + " , " + FIRST_NAME + " , " + LAST_NAME
-                + " , " + SURNAME + ") VALUES (?,?,?,?)"; //todo: delete LAST_NAME in v3
-        jdbcTemplate.update(sql, id, insertPersonFirstName, insertPersonLastName, insertPersonSurname);
+        final String sql = "INSERT INTO" + " " + TABLE_NAME + " " + "(" + ID + " , " + FIRST_NAME
+                + " , " + SURNAME + ") VALUES (?,?,?)";
+        jdbcTemplate.update(sql, id, insertPersonFirstName, insertPersonSurname);
         return 1;
     }
 
@@ -72,11 +71,10 @@ public class PersonDataAccessService implements PersonDao {
     @Override
     public int updatePersonById(UUID id, Person person) {
         final String sql = "UPDATE" + " " + TABLE_NAME + " " + "SET" + " " + FIRST_NAME + " = ? , "
-                + LAST_NAME + " = ? , " + SURNAME + " = ? " + "WHERE" + " " + ID + " = ?"; //todo: delete LAST_NAME in v3
+                + SURNAME + " = ? " + "WHERE" + " " + ID + " = ?";
         final String newPersonFirstName = person.getFirstName();
-        final String newPersonLastName = person.getSurname(); //todo: delete in v3
         final String newPersonSurname = person.getSurname();
-        jdbcTemplate.update(sql, newPersonFirstName, newPersonLastName, newPersonSurname, id);
+        jdbcTemplate.update(sql, newPersonFirstName, newPersonSurname, id);
         return 1;
     }
 }

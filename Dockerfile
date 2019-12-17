@@ -16,5 +16,5 @@
 
 FROM openjdk:12-jdk-alpine
 EXPOSE 8080
-COPY build/libs/demo-trigger-v2.jar /app.jar
+COPY build/libs/demo-trigger-v3.jar /app.jar
 ENTRYPOINT ["java","-jar", "/app.jar" ]
