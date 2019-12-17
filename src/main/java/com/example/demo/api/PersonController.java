@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.UUID;
 
-@RequestMapping("/v3")
+@RequestMapping("/v4")
 @RestController
 public class PersonController {
 

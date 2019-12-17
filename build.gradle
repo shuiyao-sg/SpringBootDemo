@@ -80,5 +80,5 @@ liquibase {
 
 bootJar {
     baseName = 'demo-trigger'
-    version = 'v3'
+    version = 'v4'
 }

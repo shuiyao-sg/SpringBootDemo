@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - preConditions:
+      - runningAs:
+          username: postgres
+
+  - changeSet:
+      id: 4.1
+      author: Admin
+      changes:
+        - dropColumn:
+            tableName: person
+            columnName: last_name
+
+  - changeSet:
+      id: 4.2
+      author: Admin
+      changes:
+        - sqlFile:
+            path: db/sql/drop_triggers_on_person_v4.sql
