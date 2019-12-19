@@ -3,6 +3,7 @@ package com.example.demo.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -15,6 +16,7 @@ public class Person {
     @NotBlank
     private final String surname;
 
+    @NotNull
     private final Integer age;
 
     public Person(@JsonProperty("id") UUID id,
