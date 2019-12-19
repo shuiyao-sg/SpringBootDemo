@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.UUID;
 
-@RequestMapping("/v4")
+@RequestMapping("/v5")
 @RestController
 public class PersonController {
 
@@ -36,6 +36,11 @@ public class PersonController {
     public Person getPersonById(@PathVariable("id") UUID id) {
         return personService.getPersonById(id)
                 .orElse(null);
+    }
+
+    @GetMapping(path = "{/age}")
+    public int getAgeSum() {
+        return personService.getAgeSum();
     }
 
     @DeleteMapping(path = "{id}")

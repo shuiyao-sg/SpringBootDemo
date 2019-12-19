@@ -39,4 +39,8 @@ public class PersonService {
     public int updatePerson(UUID id, Person newPerson) {
         return personDao.updatePersonById(id, newPerson);
     }
+
+    public int getAgeSum() {
+        return personDao.getAgeSum();
+    }
 }

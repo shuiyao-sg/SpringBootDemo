@@ -8,30 +8,19 @@ import java.util.UUID;
 public class Person {
     private final UUID id;
 
-//    @NotBlank
-//    private final String name;
-
     @NotBlank
     private final String firstName;
-
-//    @NotBlank
-//    private final String lastName;
 
     @NotBlank
     private final String surname;
 
-//    public Person(@JsonProperty("id") UUID id,
-//                  @JsonProperty("name") String name) {
-//        this.id = id;
-//        this.name = name;
-//    }
+    private int age;
 
     public Person(@JsonProperty("id") UUID id,
                   @JsonProperty("first_name") String firstName,
                   @JsonProperty("surname") String surname) {
         this.id = id;
         this.firstName = firstName;
-//        this.lastName = surname;
         this.surname = surname;
     }
 
@@ -43,11 +32,11 @@ public class Person {
         return firstName;
     }
 
-//    public String getLastName() {
-//        return lastName;
-//    }
-
     public String getSurname() {
         return surname;
+    }
+
+    public int getAge() {
+        return age;
     }
 }
