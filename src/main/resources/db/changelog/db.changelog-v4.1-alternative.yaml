@@ -1,0 +1,27 @@
+databaseChangeLog:
+  - preConditions:
+      - runningAs:
+          username: postgres
+
+  - changeSet:
+      id: 4.1.2.1
+      author: Admin
+      changes:
+        - dropColumn:
+            tableName: person
+            columnName: age
+
+  - changeSet:
+      id: 4.1.2.2
+      author: Admin
+      changes:
+        - addColumn:
+            tableName: person
+            columns:
+              - column:
+                  name: age
+                  type: integer
+                  value: 10
+                  defaultValue: 10
+                  constraints:
+                    nullable: false
