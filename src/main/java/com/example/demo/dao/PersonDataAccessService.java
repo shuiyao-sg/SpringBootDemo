@@ -16,8 +16,8 @@ public class PersonDataAccessService implements PersonDao {
     private static final String TABLE_NAME = "person";
     private static final String ID = "id";
     private static final String FIRST_NAME = "first_name";
-//    private static final String LAST_NAME = "last_name";
     private static final String SURNAME = "surname";
+    private static final String AGE = "age";
 
     @Autowired
     public PersonDataAccessService(JdbcTemplate jdbcTemplate) {
@@ -28,35 +28,41 @@ public class PersonDataAccessService implements PersonDao {
     public int insertPerson(UUID id, Person person) {
         String insertPersonFirstName = person.getFirstName();
         String insertPersonSurname = person.getSurname();
+//        Integer insertPersonAge = person.etOptionalAge().orElse(null);
+        Integer insertPersonAge = person.getAge();
         final String sql = "INSERT INTO" + " " + TABLE_NAME + " " + "(" + ID + " , " + FIRST_NAME
-                + " , " + SURNAME + ") VALUES (?,?,?)";
-        jdbcTemplate.update(sql, id, insertPersonFirstName, insertPersonSurname);
+                + " , " + SURNAME + " , " + AGE + ") VALUES (?,?,?,?)";
+        jdbcTemplate.update(sql, id, insertPersonFirstName, insertPersonSurname, insertPersonAge);
         return 1;
     }
 
     @Override
     public List<Person> selectAllPeople() {
-        final String sql = "SELECT" + " " + ID + " , " + FIRST_NAME + " , " + SURNAME + " " + "FROM" + " " + TABLE_NAME; //sql statements will be parsed
+        final String sql = "SELECT" + " " + ID + " , " + FIRST_NAME + " , " + SURNAME + " , " + AGE + " " + "FROM" + " " + TABLE_NAME; //sql statements will be parsed
 
         /*Parses sql statement to select the data. Maps the data into Java objects*/
         return jdbcTemplate.query(sql, (resultSet, i) -> {
             UUID id = UUID.fromString(resultSet.getString(ID)); //input column name
             String firstName = resultSet.getString(FIRST_NAME);
             String surname = resultSet.getString(SURNAME);
-            return new Person(id, firstName, surname);
+//            Integer age = ((Optional<Integer>) resultSet.getObject(AGE)).orElse(null);
+            Integer age = (Integer) resultSet.getObject(AGE);
+            return new Person(id, firstName, surname, age);
         });
     }
 
     @Override
     public Optional<Person> selectPersonById(UUID id) {
-        final String sql = "SELECT" + " " + ID + " , " + FIRST_NAME + " , " + SURNAME + " " + "FROM"
+        final String sql = "SELECT" + " " + ID + " , " + FIRST_NAME + " , " + SURNAME + " , " + AGE + " " + "FROM"
                 + " " + TABLE_NAME + " " + "WHERE" + " " + ID + " = ?"; //note the question mark
         Person person = jdbcTemplate.queryForObject(sql,
                 new Object[]{id},
                 (resultSet, i) -> {
                     String firstName = resultSet.getString(FIRST_NAME);
                     String surname = resultSet.getString(SURNAME);
-                    return new Person(id, firstName, surname);
+//                    Integer age = ((Optional<Integer>) resultSet.getObject(AGE)).orElse(null);
+                    Integer age = (Integer) resultSet.getObject(AGE);
+                    return new Person(id, firstName, surname, age);
                 });
         return Optional.ofNullable(person);
     }
@@ -71,10 +77,12 @@ public class PersonDataAccessService implements PersonDao {
     @Override
     public int updatePersonById(UUID id, Person person) {
         final String sql = "UPDATE" + " " + TABLE_NAME + " " + "SET" + " " + FIRST_NAME + " = ? , "
-                + SURNAME + " = ? " + "WHERE" + " " + ID + " = ?";
+                + SURNAME + " = ? , " + AGE + " = ? " + "WHERE" + " " + ID + " = ?";
         final String newPersonFirstName = person.getFirstName();
         final String newPersonSurname = person.getSurname();
-        jdbcTemplate.update(sql, newPersonFirstName, newPersonSurname, id);
+//        final Integer newPersonAge = person.getOptionalAge().orElse(null);
+        final Integer newPersonAge = person.getAge();
+        jdbcTemplate.update(sql, newPersonFirstName, newPersonSurname, newPersonAge, id);
         return 1;
     }
 }

@@ -23,5 +23,5 @@ public interface PersonDao {
 
     int updatePersonById(UUID id, Person person);
 
-    int getAgeSum();
+//    int getAgeSum();
 }

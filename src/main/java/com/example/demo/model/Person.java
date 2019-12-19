@@ -3,6 +3,7 @@ package com.example.demo.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.validation.constraints.NotBlank;
+import java.util.Optional;
 import java.util.UUID;
 
 public class Person {
@@ -14,14 +15,16 @@ public class Person {
     @NotBlank
     private final String surname;
 
-    private int age;
+    private final Integer age;
 
     public Person(@JsonProperty("id") UUID id,
                   @JsonProperty("first_name") String firstName,
-                  @JsonProperty("surname") String surname) {
+                  @JsonProperty("surname") String surname,
+                  @JsonProperty("age") Integer age) {
         this.id = id;
         this.firstName = firstName;
         this.surname = surname;
+        this.age = age;
     }
 
     public UUID getId() {
@@ -36,7 +39,11 @@ public class Person {
         return surname;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
+
+//    public Optional<Integer> getOptionalAge() {
+//        return Optional.ofNullable(age);
+//    }
 }
