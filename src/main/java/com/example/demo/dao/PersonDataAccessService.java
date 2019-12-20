@@ -1,10 +1,15 @@
 package com.example.demo.dao;
 
 import com.example.demo.model.Person;
+import org.postgresql.core.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Connection;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -84,5 +89,14 @@ public class PersonDataAccessService implements PersonDao {
         final Integer newPersonAge = person.getAge();
         jdbcTemplate.update(sql, newPersonFirstName, newPersonSurname, newPersonAge, id);
         return 1;
+    }
+
+    @Override
+    public int getNumberOfPeopleWithAge(int age) {
+        final String sql = "SELECT calculateNumberOfPeopleWithAge(?)";
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate).withFunctionName("calculateNumberOfPeopleWithAge");
+        SqlParameterSource ageInput = new MapSqlParameterSource().addValue("inputAge", age);
+        int number = simpleJdbcCall.executeFunction(Integer.class, ageInput);
+        return number;
     }
 }

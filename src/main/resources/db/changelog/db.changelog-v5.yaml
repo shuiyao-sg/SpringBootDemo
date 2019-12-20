@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - preConditions:
+      - runningAs:
+          username: postgres
+
+  - changeSet:
+      id: 5.0.2
+      author: Admin
+      changes:
+        - sqlFile:
+            path: db/sql/calculateNumberOfPeopleWithAge.sql

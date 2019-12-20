@@ -52,4 +52,9 @@ public class PersonController {
     public void updatePerson(@PathVariable("id") UUID id, @Valid @NotNull @RequestBody Person personToUpdate) {
         personService.updatePerson(id, personToUpdate);
     }
+
+    @GetMapping(path = "/age")
+    public int getNumberOfPeopleWithAge(@PathVariable("/age") @RequestParam int age) {
+        return personService.getNumberOfPeopleWithAge(age);
+    }
 }
